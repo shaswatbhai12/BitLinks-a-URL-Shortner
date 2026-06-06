@@ -13,19 +13,11 @@ export default function Home() {
       <section className="grid grid-cols-2 h-[50vh]">
         <div className="flex flex-col gap-4 items-center justify-center">
           <p className={`text-3xl font-bold ${poppins.className}`}>The Best URL Shortener in the Market</p>
-          <p className="px-56">We are the most straightforward URL Shortener in India. Most of the URL Shortners will track you and ask you to give your details for login. We understand your needs and hence we have created this URL shortner.</p>
+          <p className="px-30 text-center">We are the most straightforward URL Shortener in India. Most of the URL Shortners will track you and ask you to give your details for login. We understand your needs and hence we have created this URL shortner.</p>
 
-          <div className='flex gap-3 justify-center md:justify-start w-full'>
-            <Link href="/generate">
-              <button className='bg-purple-500 rounded-lg shadow-lg px-4 py-2 font-bold text-white hover:bg-purple-600 transition-colors'>
-                Try Now
-              </button>
-            </Link>
-            <Link href="/github">
-              <button className='bg-purple-500 rounded-lg shadow-lg px-4 py-2 font-bold text-white hover:bg-purple-600 transition-colors'>
-                GitHub
-              </button>
-            </Link>
+          <div className="flex gap-3 justify-start">
+            <Link href="/shorten"><button className="bg-purple-500 rounded-lg shadow-lg p-3 py-1 font-bold text-white">Try Now</button></Link>
+            <Link href="/github"><button className="bg-purple-500 rounded-lg shadow-lg p-3 py-1 font-bold text-white">Github</button></Link>
           </div>
         </div>
         <div className=" flex justify-start relative">
