@@ -5,10 +5,35 @@ import React, { useState } from 'react'
 const Shorten = () => {
         const [url, seturl] = useState("")
         const [shorturl, setshorturl] = useState("")
-        const [generated, setGenerated] = useState(false)
+        const [generated, setGenerated] = useState("")
 
-        const handleChange = (first) => {
+        const generate = () => {
+            const myHeaders = new Headers()
+            myHeaders.append("Content-type", "application/json")
 
+            const raw = JSON.stringify({
+                "url": url,
+                "shorturl": shorturl
+            });
+
+            const requestOptions = {
+                method: "POST",
+                headers: myHeaders,
+                body: raw,
+                redirect: "follow"
+            };
+
+            fetch("/api/generate", requestOptions)
+                .then((response) => response.json())
+                .then((result) => {
+                    setGenerated(`${process.env.NEXT_HOST}/${shorturl}`)
+                    seturl("")
+                    setshorturl("")
+                    console.log(result)
+                    alert(result.message)
+
+                })
+                .catch((error) => console.error(error))
         }
     return(
     <div className='mx-auto w-512 max-w-lg bg-purple-100 my-16 p-8 rounded-lg flex flex-col gap-4'>
@@ -26,7 +51,7 @@ const Shorten = () => {
             placeholder='Enter your preferd short URL Text' 
             onChange={e => {setshorturl(e.target.value)}}/>
 
-            <button className='bg-purple-500 rounded-lg shadow-lg p-3 py-1 my-3 font-bold text-white'>Generate Now</button>
+            <button onClick={generate} className='bg-purple-500 rounded-lg shadow-lg p-3 py-1 my-3 font-bold text-white'>Generate Now</button>
         </div>
     </div>
     )
