@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from 'react'
+import Link from 'next/link'
 
 const Shorten = () => {
         const [url, seturl] = useState("")
@@ -26,7 +27,7 @@ const Shorten = () => {
             fetch("/api/generate", requestOptions)
                 .then((response) => response.json())
                 .then((result) => {
-                    setGenerated(`${process.env.NEXT_HOST}/${shorturl}`)
+                    setGenerated(`${process.env.NEXT_PUBLIC_HOST}/${shorturl}`)
                     seturl("")
                     setshorturl("")
                     console.log(result)
@@ -53,6 +54,9 @@ const Shorten = () => {
 
             <button onClick={generate} className='bg-purple-500 rounded-lg shadow-lg p-3 py-1 my-3 font-bold text-white'>Generate Now</button>
         </div>
+
+        {generated && <><span className = 'font-bold text-lg'>Your Link</span> <code><Link target="_blank" href={generated}>{generated}</Link></code>
+            </>}
     </div>
     )
 }
